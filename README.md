@@ -6,18 +6,6 @@ Even with the vegetation slider at maximum, X-Plane 12 forests often look like l
 
 Default factor 0.7 ≈ **twice as many trees per area.**
 
-Vanilla
-<img width="3839" height="2159" alt="Screenshot_19" src="https://github.com/user-attachments/assets/d2080eaa-e470-47c9-8cf3-8022ac2c21a3" />
-
-Tweaked
-<img width="3839" height="2159" alt="Screenshot_17" src="https://github.com/user-attachments/assets/30160261-069e-493b-b294-1c68cad092ba" />
-
-Vanilla
-<img width="3839" height="2159" alt="Screenshot_16" src="https://github.com/user-attachments/assets/11fe19c2-0c84-4c32-ae9d-50b301609397" />
-
-Tweaked
-<img width="3839" height="2159" alt="Screenshot_14" src="https://github.com/user-attachments/assets/0d63d504-4830-487d-bc6b-1ec4a3617fa7" /> 
-
 ---
 
 ## Features
@@ -31,6 +19,7 @@ Tweaked
 - **Grass, shrubs and hedges are left alone:** only files with a spacing above 3.1 m are changed
 - **Minimal changes:** only two header lines per file (`SPACING`, `RANDOM`) are edited. The 3D tree meshes stay byte-identical
 - **Safe if interrupted:** the change is logged before each file is written, and every file is written to a temp copy and then swapped in
+- **Optional in-sim toggle:** a small FlyWithLua script switches between dense and original forests during flight, see below
 
 ## Which edition?
 
@@ -65,6 +54,21 @@ No admin rights needed. Windows only (PowerShell, which ships with Windows 10/11
 
 To change the factor, choose *Restore* first and then *Apply* with the new value.
 
+## In-sim toggle (optional, FlyWithLua)
+
+`ForestDensityToggle.lua` lets you switch between the dense forests and roughly the original density during flight, without touching any files. Handy for FPS-heavy areas or before/after comparisons.
+
+**Requires:** the tweak applied (see above) and [FlyWithLua NG](https://forums.x-plane.org/index.php?/files/file/82888-flywithlua-ng-next-generation-plus-edition-for-x-plane-12-win-lin-mac/) for X-Plane 12. Without the tweak the script can only thin out the vanilla forests.
+
+1. Copy `ForestDensityToggle.lua` to `X-Plane 12\Resources\plugins\FlyWithLua\Scripts\`
+2. In the sim: *Plugins → FlyWithLua → FlyWithLua Macros → Forest density: …*
+   or bind a key or joystick button. Search for `ForestDensity` in the keyboard/joystick settings:
+   - `FlyWithLua/ForestDensity/toggle`
+   - `FlyWithLua/ForestDensity/dense`
+   - `FlyWithLua/ForestDensity/original`
+
+How it works: X-Plane multiplies the forest density from the `.for` files by the vegetation slider value (`forest/density`). The script switches that value between your slider setting and slider × factor², which is about the original density. The factor is read from the tweak's backup log. After switching, the scenery reloads (short pause). Trees are placed when scenery loads. Changing graphics settings resets the value to the slider setting.
+
 ## How it works
 
 Every `.for` file defines the grid that trees are placed on:
@@ -94,7 +98,7 @@ More trees means more GPU work, especially when flying low over large forests. C
 
 ## Compatibility
 
-- Tested with **X-Plane 12.4.4**. The `.for` format and the `SPACING` command are documented in Laminar's [forest file format specification](https://developer.x-plane.com/article/forest-for-file-format-specification).
+- Tested with **X-Plane 12.4.4** and FlyWithLua NG 2.8.12. The `.for` format and the `SPACING` command are documented in Laminar's [forest file format specification](https://developer.x-plane.com/article/forest-for-file-format-specification).
 - Works alongside simHeaven X-World and Global Forests v2.
 - Forests from other add-ons are not touched.
 

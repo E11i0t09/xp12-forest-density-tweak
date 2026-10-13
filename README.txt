@@ -1,4 +1,4 @@
-XP12 Forest Density Tweak  v1.0
+XP12 Forest Density Tweak  v1.1
 ===============================
 
 Denser forests for X-Plane 12. The vegetation slider can never exceed the tree
@@ -48,6 +48,21 @@ AFTER AN UPDATE
 ---------------
 X-Plane and Global Forests updates replace the forest files with originals.
 Just run "Apply" again - the tool detects which files were reset.
+
+
+IN-SIM TOGGLE (OPTIONAL)
+------------------------
+ForestDensityToggle.lua switches between dense and original forests during
+flight. Needs FlyWithLua NG and the tweak applied (without the tweak it can
+only thin out the vanilla forests).
+
+  1. Copy ForestDensityToggle.lua to
+     X-Plane 12\Resources\plugins\FlyWithLua\Scripts\
+  2. In the sim: Plugins > FlyWithLua > FlyWithLua Macros > Forest density
+     or bind a key: search "ForestDensity" in the keyboard settings
+     (toggle / dense / original).
+
+The scenery reloads after switching (short pause).
 
 
 PERFORMANCE
