@@ -1,4 +1,4 @@
-XP12 Forest Density Tweak  v1.1
+XP12 Forest Density Tweak  v1.2
 ===============================
 
 Denser forests for X-Plane 12. The vegetation slider can never exceed the tree
@@ -29,8 +29,14 @@ HOW TO USE
 3. Double-click the .bat of your edition.
 4. Menu: [1] Apply   [2] Restore original   [3] Status
 
-  Factor: 0.7 recommended. 0.8 = milder / cheaper, 0.6 = very dense (strong GPU).
-  To change the factor: Restore first, then Apply with the new value.
+  Apply asks for two values:
+  Density factor: 0.4 - 1.0 (Enter = 0.7, 1 = unchanged). 0.8 = milder / cheaper, 0.6 = very dense (strong GPU).
+  Height factor:  0.5 - 1.0 (Enter = 1 = unchanged). Scales min and max height
+                  of the trees, so the height variation shrinks along.
+                  The 3D tree models are scaled too. This rewrites the files
+                  (a few minutes) and keeps a compressed backup of the originals
+                  in ForestDensityTweak\mesh_backup (about 1.5 GB with GFv2).
+  To change a factor: Restore first, then Apply with the new values.
 
 Grass, shrubs and hedges (spacing <= 3.1 m) are not changed.
 Only two header lines per file are edited; the 3D tree models stay byte-identical.
@@ -50,19 +56,24 @@ X-Plane and Global Forests updates replace the forest files with originals.
 Just run "Apply" again - the tool detects which files were reset.
 
 
-IN-SIM TOGGLE (OPTIONAL)
+IN-SIM WINDOW (OPTIONAL)
 ------------------------
-ForestDensityToggle.lua switches between dense and original forests during
-flight. Needs FlyWithLua NG and the tweak applied (without the tweak it can
-only thin out the vanilla forests).
+ForestDensityToggle.lua adds a small window to switch the forest density in
+4 steps during flight. Needs FlyWithLua NG+ and the tweak applied (without the
+tweak it can only thin out the vanilla forests).
 
   1. Copy ForestDensityToggle.lua to
      X-Plane 12\Resources\plugins\FlyWithLua\Scripts\
-  2. In the sim: Plugins > FlyWithLua > FlyWithLua Macros > Forest density
-     or bind a key: search "ForestDensity" in the keyboard settings
-     (toggle / dense / original).
+  2. In the sim: Plugins > Forest Density > Show / hide window
+     (fallback: Plugins > FlyWithLua > FlyWithLua Macros > Forest density: window)
+     or bind keys: search "ForestDensity" in the keyboard settings
+     (window / toggle / dense / original).
 
-The scenery reloads after switching (short pause).
+Pick a step and press Apply. The new density applies to scenery that loads
+as you fly on. With "Reload scenery on apply" ticked, X-Plane loads all
+scenery around you again so it shows at once - that takes a while, because
+trees are placed while scenery loads. The window also shows the tree height
+set by the tweak. Window position and settings are remembered.
 
 
 PERFORMANCE
