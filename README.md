@@ -5,6 +5,11 @@
 Even with the vegetation slider at maximum, X-Plane 12 forests often look like loose groups of trees instead of a forest. That's because the slider can never go above the density set in the forest definition files (`.for`). This tool lowers the tree spacing in those files, safely and reversibly.
 
 Default factor 0.7 ≈ **twice as many trees per area.**
+Vanilla
+<img width="3839" height="2159" alt="Screenshot_19" src="https://github.com/user-attachments/assets/d2080eaa-e470-47c9-8cf3-8022ac2c21a3" />
+
+Tweaked
+<img width="3839" height="2159" alt="Screenshot_17" src="https://github.com/user-attachments/assets/30160261-069e-493b-b294-1c68cad092ba" />
 
 Tweaked
 <img width="3839" height="2159" alt="Screenshot_14" src="https://github.com/user-attachments/assets/0d63d504-4830-487d-bc6b-1ec4a3617fa7" /> 
