@@ -1,4 +1,4 @@
-# XP12 Forest Density Tweak
+# XP12 Forest Tweak
 
 **Denser, more realistic forests for X-Plane 12 – for vanilla, simHeaven X-World and Global Forests v2. Optionally smaller trees.**
 
@@ -74,7 +74,7 @@ To change a factor, choose *Restore* first and then *Apply* with the new values.
 **Requires:** the tweak applied (see above) and [FlyWithLua NG+](https://github.com/X-Friese/FlyWithLua) for X-Plane 12 (the download link is on that page). Without the tweak the script can only thin out the vanilla forests.
 
 1. Copy `ForestDensityToggle.lua` to `X-Plane 12\Resources\plugins\FlyWithLua\Scripts\`
-2. In the sim: *Plugins → Forest Density → Show / hide window* (fallback: *Plugins → FlyWithLua → FlyWithLua Macros → Forest density: window*)
+2. In the sim: *Plugins → Forest Tweak → Show / hide window* (fallback: *Plugins → FlyWithLua → FlyWithLua Macros → Forest Tweak: window*)
 3. Window: pick a step (blue) and press **Apply**; the active step is green.
    - **Reload scenery on apply** off (default): the new density shows on scenery that loads as you fly on.
    - On: it shows at once. X-Plane loads all scenery around you again, which takes a while because trees are placed while scenery loads (at most one reload per minute).
@@ -111,7 +111,7 @@ Folders that are changed:
 - `Resources\default scenery\1200 forests` (both editions)
 - `Custom Scenery\Global_Forests_v2` (GFv2 edition only)
 
-The original values (density and height lines) are kept in `<X-Plane 12>\ForestDensityTweak\backup.log`. **Don't delete this folder while the tweak is active.**
+The original values (density and height lines) are kept in `<X-Plane 12>\ForestDensityTweak\backup.log` (the folder keeps its name from earlier versions). **Don't delete this folder while the tweak is active.**
 
 ## Undo
 

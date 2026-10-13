@@ -1,6 +1,6 @@
 --[[
-  ForestDensityToggle.lua  -  part of XP12 Forest Density Tweak
-  Version 1.2 (2026-10-14)   https://github.com/E11i0t09/xp12-forest-density-tweak
+  ForestDensityToggle.lua  -  in-sim window of XP12 Forest Tweak
+  Version 1.2.1 (2026-10-14)   https://github.com/E11i0t09/xp12-forest-tweak
 
   In-sim control of the forest density on top of the tweak, without touching
   any files: a small window with 4 density steps and an overview of the tree
@@ -20,8 +20,8 @@
     fly on. Tree height can't change in the sim.
 
   Usage
-    - Menu: Plugins > Forest Density > Show / hide window
-      (fallback: Plugins > FlyWithLua > FlyWithLua Macros > Forest density: window)
+    - Menu: Plugins > Forest Tweak > Show / hide window
+      (fallback: Plugins > FlyWithLua > FlyWithLua Macros > Forest Tweak: window)
     - Commands (Settings > Keyboard / Joystick, search "ForestDensity"):
         FlyWithLua/ForestDensity/window     show / hide the window
         FlyWithLua/ForestDensity/toggle     dense <-> original
@@ -271,7 +271,7 @@ end
 local function open_window()
     if wnd then return end
     wnd = float_wnd_create(WIN_W, WIN_H, 1, true)
-    float_wnd_set_title(wnd, "Forest Density")
+    float_wnd_set_title(wnd, "Forest Tweak")
     float_wnd_set_imgui_builder(wnd, "fdt_build")
     float_wnd_set_onclose(wnd, "fdt_on_close")
     pcall(float_wnd_set_resizing_limits, wnd, WIN_W, WIN_H, 1200, 900)
@@ -307,7 +307,7 @@ create_command("FlyWithLua/ForestDensity/toggle",   "Forest density: toggle dens
 create_command("FlyWithLua/ForestDensity/dense",    "Forest density: dense (tweaked)",         "fdt_set_dense()",     "", "")
 create_command("FlyWithLua/ForestDensity/original", "Forest density: original",                "fdt_set_original()",  "", "")
 
-add_macro("Forest density: window", "fdt_toggle_window()")   -- fallback if the Plugins menu can't be created
+add_macro("Forest Tweak: window", "fdt_toggle_window()")   -- fallback if the Plugins menu can't be created
 
 function fdt_draw()
     if msg_text and os.time() < msg_until then draw_string(30, SCREEN_HIGHT - 60, msg_text, "white") end
@@ -336,9 +336,9 @@ local function create_plugins_menu()
     local okl, xplm = pcall(ffi.load, libname)
     if not okl then return false end
     local plugins = xplm.XPLMFindPluginsMenu()
-    local item = xplm.XPLMAppendMenuItem(plugins, "Forest Density", nil, 0)
+    local item = xplm.XPLMAppendMenuItem(plugins, "Forest Tweak", nil, 0)
     if item < 0 then return false end
-    local menu = xplm.XPLMCreateMenu("Forest Density", plugins, item, nil, nil)
+    local menu = xplm.XPLMCreateMenu("Forest Tweak", plugins, item, nil, nil)
     for _, e in ipairs({ { "Show / hide window", "window" }, { "Dense", "dense" },
                          { "Original", "original" }, { "Toggle dense / original", "toggle" } }) do
         xplm.XPLMAppendMenuItemWithCommand(menu, e[1], xplm.XPLMFindCommand("FlyWithLua/ForestDensity/" .. e[2]))
@@ -364,5 +364,5 @@ end
 
 if cfg.visible then open_window() end
 
-logMsg(string.format("ForestDensityToggle 1.2: ready (dense %.2f, original %.2f, factor %.2f, height %.2f, %d files, %d with 3D models scaled)",
+logMsg(string.format("ForestDensityToggle 1.2.1: ready (dense %.2f, original %.2f, factor %.2f, height %.2f, %d files, %d with 3D models scaled)",
        dense_value, orig_value(), factor, height, info.files, info.meshes))
