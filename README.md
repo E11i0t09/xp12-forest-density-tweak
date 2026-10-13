@@ -7,6 +7,12 @@ Even with the vegetation slider at maximum, X-Plane 12 forests often look like l
 Default factor 0.7 ≈ **twice as many trees per area.**
 
 ---
+Tweaked
+<img width="3839" height="2159" alt="Screenshot_17" src="https://github.com/user-attachments/assets/fd166050-0c96-4c28-9a9f-000710d705c8" />
+
+Vanilla
+<img width="3839" height="2159" alt="Screenshot_19" src="https://github.com/user-attachments/assets/f3de5f52-c877-40c2-bf9b-a0b58bcec01b" />
+
 
 ## Features
 
