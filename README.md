@@ -20,10 +20,6 @@ Autumn, wide view over a hilly forest region: the original forests show ground b
 |---|---|
 | ![Original X-Plane 12 autumn forest from altitude: trees with visible ground in between](screenshots/before_autumn.jpg) | ![Forest Tweak applied: closed autumn forest canopy over the same area](screenshots/after_autumn.jpg) |
 
-| Vanilla | Tweaked |
-|---|---|
-| <img alt="Screenshot_19 (vanilla)" src="https://github.com/user-attachments/assets/f3de5f52-c877-40c2-bf9b-a0b58bcec01b" /> | <img alt="Screenshot_17 (tweaked)" src="https://github.com/user-attachments/assets/fd166050-0c96-4c28-9a9f-000710d705c8" /> |
-
 In-sim window (`ForestDensityToggle.lua`): density steps, scenery reload option and the tree height set by the tweak (here density 0.5, tree height 60 %).
 
 ![Forest Tweak window in X-Plane 12 over a dense forest slope](screenshots/window.jpg)
