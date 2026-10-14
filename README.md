@@ -14,6 +14,12 @@ Same view over the Inn valley near Innsbruck, with simHeaven X-World and Global 
 |---|---|
 | ![Original X-Plane 12 forest: single trees standing apart on the slope](screenshots/before.jpg) | ![Forest Tweak applied: closed, dense forest on the same slope](screenshots/after.jpg) |
 
+Autumn, wide view over a hilly forest region: the original forests show ground between the trees, with the tweak the forest canopy is closed.
+
+| Before (original density) | After (Forest Tweak applied) |
+|---|---|
+| ![Original X-Plane 12 autumn forest from altitude: trees with visible ground in between](screenshots/before_autumn.jpg) | ![Forest Tweak applied: closed autumn forest canopy over the same area](screenshots/after_autumn.jpg) |
+
 In-sim window (`ForestDensityToggle.lua`): density steps, scenery reload option and the tree height set by the tweak (here density 0.5, tree height 60 %).
 
 ![Forest Tweak window in X-Plane 12 over a dense forest slope](screenshots/window.jpg)
