@@ -20,6 +20,10 @@ Autumn, wide view over a hilly forest region: the original forests show ground b
 |---|---|
 | ![Original X-Plane 12 autumn forest from altitude: trees with visible ground in between](screenshots/before_autumn.jpg) | ![Forest Tweak applied: closed autumn forest canopy over the same area](screenshots/after_autumn.jpg) |
 
+| Vanilla | Tweaked |
+|---|---|
+| <img alt="Screenshot_19 (vanilla)" src="https://github.com/user-attachments/assets/f3de5f52-c877-40c2-bf9b-a0b58bcec01b" /> | <img alt="Screenshot_17 (tweaked)" src="https://github.com/user-attachments/assets/fd166050-0c96-4c28-9a9f-000710d705c8" /> |
+
 In-sim window (`ForestDensityToggle.lua`): density steps, scenery reload option and the tree height set by the tweak (here density 0.5, tree height 60 %).
 
 ![Forest Tweak window in X-Plane 12 over a dense forest slope](screenshots/window.jpg)
@@ -79,57 +83,28 @@ No admin rights needed. Windows only (PowerShell, which ships with Windows 10/11
 | 0.8 | trees 20 % smaller |
 | 0.5 | half height (minimum) |
 
-Min and max height of every tree are scaled by the same factor, so a tree that varied between 12 and 17 m now varies between 9.6 and 13.6 m at 0.8. Undergrowth, branches and stones inside the forest files are scaled along to keep the proportions. Density and height can be combined, or used on their own (density 1 = unchanged).
+**Smaller trees – all of them, including the 3D models.** The height factor scales every tree in the forest files: the distant billboards *and* the close-up 3D models, so near and far trees match without popping. Undergrowth scales along. Example: at 0.8 a 12–17 m tree becomes 9.6–13.6 m.
 
-Smaller trees also need smaller 3D models (the close-up trees), otherwise they pop when switching from the distant billboards. The tool scales those models, which rewrites the forest files completely (a few minutes). Before that it stores a compressed copy of each original file in `ForestDensityTweak\mesh_backup` (about 30 % of the file size, roughly 1.5 GB with Global Forests v2) for an exact restore. The tool checks the free disk space first.
+Scaling the 3D models rewrites the forest files (a few minutes). A compressed copy of each original is kept in `ForestDensityTweak\mesh_backup` (about 1.5 GB with Global Forests v2) for an exact restore. Free disk space is checked first.
 
-To change a factor, choose *Restore* first and then *Apply* with the new values.
+To change a factor: *Restore*, then *Apply* with the new values.
 
-## In-sim window (optional, FlyWithLua)
+## In-sim window (optional)
 
-`ForestDensityToggle.lua` adds a small window to switch the forest density during flight in 4 steps (Original, Low, Medium, Dense), without touching any files, and shows the tree height set by the tweak (typical and tallest tree before/after, whether the 3D models are scaled). Handy for FPS-heavy areas or before/after comparisons.
-
-**Requires:** the tweak applied (see above) and [FlyWithLua NG+](https://github.com/X-Friese/FlyWithLua) for X-Plane 12 (the download link is on that page). Without the tweak the script can only thin out the vanilla forests.
+Switch the density in flight in 4 steps and see the tree height set by the tweak. Needs the tweak applied and [FlyWithLua NG+](https://github.com/X-Friese/FlyWithLua).
 
 1. Copy `ForestDensityToggle.lua` to `X-Plane 12\Resources\plugins\FlyWithLua\Scripts\`
-2. In the sim: *Plugins → Forest Tweak → Show / hide window* (fallback: *Plugins → FlyWithLua → FlyWithLua Macros → Forest Tweak: window*)
-3. Window: pick a step (blue) and press **Apply**; the active step is green.
-   - **Reload scenery on apply** off (default): the new density shows on scenery that loads as you fly on.
-   - On: it shows at once. X-Plane loads all scenery around you again, which takes a while because trees are placed while scenery loads (at most one reload per minute).
+2. In the sim: *Plugins → Forest Tweak → Show / hide window*
+3. Pick a step and press **Apply**. With *Reload scenery on apply* ticked it shows at once (the reload takes a while), otherwise on scenery loaded as you fly on.
 
-   Position, size and settings are remembered.
-4. Optional key or joystick bindings (search `ForestDensity` in the settings):
-   - `FlyWithLua/ForestDensity/window`
-   - `FlyWithLua/ForestDensity/toggle`
-   - `FlyWithLua/ForestDensity/dense`
-   - `FlyWithLua/ForestDensity/original`
-
-How it works: X-Plane multiplies the forest density from the `.for` files by the vegetation slider value (`forest/density`). The script sets that value between slider × factor² (about the original density) and the slider value (full tweaked density). The factor is read from the tweak's backup log. Trees are placed when scenery loads, so a change shows on newly loaded scenery, or at once with the optional reload. Changing graphics settings resets the value to the slider setting. Tree height can't be changed in the sim, only with the tweak.
+Key bindings: search `ForestDensity` in the keyboard settings.
 
 ## How it works
 
-Every `.for` file defines the grid that trees are placed on:
-
-```
-SPACING 13 13    # distance between trees in metres
-RANDOM  8 8      # how far each tree may deviate from that grid
-```
-
-The tool multiplies both values by your factor. RANDOM is scaled too, so the forest keeps the same natural irregularity instead of trees clumping together.
-
-The tree list at the end of each file holds min and max height per tree type (`TREE … 12 17 …`, `TREE2 … 1.5 2.5 1.5 …`). The height factor scales these two values.
-
-- `TREE2` trees have a nominal height that matches their 3D model; X-Plane scales the model to the chosen height by itself, so nothing else changes.
-- `TREE` trees have no nominal height; their 3D models are built in real metres and drawn at that size. For these, the tool multiplies the vertex coordinates (`VERTEX x y z`) of the referenced models by the height factor.
-
-With density only, just the header lines change and the 3D mesh data is copied byte for byte.
-
-Folders that are changed:
-
-- `Resources\default scenery\1200 forests` (both editions)
-- `Custom Scenery\Global_Forests_v2` (GFv2 edition only)
-
-The original values (density and height lines) are kept in `<X-Plane 12>\ForestDensityTweak\backup.log` (the folder keeps its name from earlier versions). **Don't delete this folder while the tweak is active.**
+- **Density:** `SPACING` (tree distance) and `RANDOM` in each `.for` file are multiplied by the factor. The vegetation slider can never go above this value.
+- **Height:** min/max height in each file's tree list is multiplied by the factor. The 3D models are scaled to match.
+- **Changed folders:** `Resources\default scenery\1200 forests`, plus `Custom Scenery\Global_Forests_v2` in the GFv2 edition.
+- **Backup:** original values in `<X-Plane 12>\ForestDensityTweak\backup.log`. **Keep this folder while the tweak is active.**
 
 ## Undo
 
