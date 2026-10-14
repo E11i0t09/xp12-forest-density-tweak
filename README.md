@@ -6,6 +6,18 @@ Even with the vegetation slider at maximum, X-Plane 12 forests often look like l
 
 Default factor 0.7 ≈ **twice as many trees per area.**
 
+## Screenshots
+
+Same view over the Inn valley near Innsbruck, with simHeaven X-World and Global Forests v2.
+
+| Before (original density) | After (Forest Tweak applied) |
+|---|---|
+| ![Original X-Plane 12 forest: single trees standing apart on the slope](screenshots/before.jpg) | ![Forest Tweak applied: closed, dense forest on the same slope](screenshots/after.jpg) |
+
+In-sim window (`ForestDensityToggle.lua`): density steps, scenery reload option and the tree height set by the tweak (here density 0.5, tree height 60 %).
+
+![Forest Tweak window in X-Plane 12 over a dense forest slope](screenshots/window.jpg)
+
 ---
 
 ## Features
@@ -18,7 +30,7 @@ Default factor 0.7 ≈ **twice as many trees per area.**
 - **Survives updates:** after an X-Plane or Global Forests update, just run *Apply* again. Files that were reset are detected and tweaked again
 - **Never applied twice:** both editions share one backup log, so the default forests are only ever scaled once
 - **Grass, shrubs and hedges are left alone:** only files with a spacing above 3.1 m are changed
-- **Minimal changes:** only two header lines per file (`SPACING`, `RANDOM`) are edited. The 3D tree meshes stay byte-identical
+- **Minimal changes:** density only edits two header lines per file (`SPACING`, `RANDOM`). The height option also edits the tree list and scales the 3D tree models, with a compressed backup for an exact restore
 - **Safe if interrupted:** the change is logged before each file is written, and every file is written to a temp copy and then swapped in
 - **Optional in-sim window:** a small FlyWithLua script switches the forest density in 4 steps during flight, see below
 
